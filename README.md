@@ -1,6 +1,6 @@
 # hbnyoni.github.io
 
-Personal portfolio site of Handsome Bongani Nyoni, geospatial data scientist at Place Alert Labs, Midlands State University.
+Personal portfolio site of Handsome Bongani Nyoni, PhD student in Geomatics at the University of Cape Town and geospatial data scientist at Place Alert Labs, Midlands State University.
 
 Live at https://hbnyoni.github.io/
 
