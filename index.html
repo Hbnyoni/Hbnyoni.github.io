@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c1e3e'/%3E%3Cpath d='M8 8h48v48H8z' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cpath d='M16 44 28 24l10 12 10-16' fill='none' stroke='%237ea7ff' stroke-width='4'/%3E%3Ccircle cx='48' cy='20' r='5' fill='%23ff6a5c'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Handsome Bongani Nyoni">
+<meta property="og:description" content="Handsome Bongani Nyoni, geospatial data scientist at Place Alert Labs, Midlands State University. GIS, remote sensing, Web GIS and personal exposure science.">
+<meta property="og:url" content="https://hbnyoni.github.io/">
+<meta property="og:image" content="https://hbnyoni.github.io/assets/nyoni.jpg">
+<link rel="canonical" href="https://hbnyoni.github.io/">
+<title>Handsome Bongani Nyoni</title>
+<meta name="description" content="Handsome Bongani Nyoni, geospatial data scientist at Place Alert Labs, Midlands State University. GIS, remote sensing, Web GIS and personal exposure science.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+/* Layout: a survey map sheet. Left-aligned text block beside a framed "sheet" (grid + GPS track) with a map collar;
+   sections below read like sheet marginalia: small mono labels, hairline rules, dates in a fixed left column. */
+:root{
+  --paper:#ffffff;      /* sheet white */
+  --ink:#0c1e3e;        /* navy ink */
+  --ink-2:#44536d;      /* secondary text, navy-grey */
+  --rule:#d8dfeb;       /* hairlines, blue-biased */
+  --wash:#f2f5fa;       /* panel fill */
+  --accent:#1f5bd8;     /* survey blue */
+  --signal:#d2312f;     /* live marker, GPS head */
+  --band:#0c1e3e;       /* contact band */
+  --band-fg:#ffffff;
+  --band-2:#b9c6dd;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --s-xs:.78rem; --s-sm:.9rem; --s-md:1rem; --s-lg:1.25rem; --s-xl:1.7rem;
+  --s-name:clamp(2.3rem,6.2vw,4.7rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0a1630; --ink:#edf1f8; --ink-2:#a7b3ca; --rule:#223459; --wash:#0f1f42;
+    --accent:#7ea7ff; --signal:#ff6a5c; --band:#13264f; --band-fg:#edf1f8; --band-2:#a7b3ca; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0a1630; --ink:#edf1f8; --ink-2:#a7b3ca; --rule:#223459; --wash:#0f1f42;
+  --accent:#7ea7ff; --signal:#ff6a5c; --band:#13264f; --band-fg:#edf1f8; --band-2:#a7b3ca; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--s-md);line-height:1.62;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+
+.wrap{max-width:1120px;margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- header ---------- */
+.top{border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.mark{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.mark b{font-family:var(--f-display);font-stretch:118%;font-weight:800;font-size:.86rem;letter-spacing:.06em;
+  border:1.5px solid var(--ink);padding:3px 7px 2px}
+.mark span{font-family:var(--f-mono);font-size:var(--s-xs);color:var(--ink-2)}
+.nav{display:flex;gap:4px 18px;flex-wrap:wrap}
+.nav a{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-decoration:none}
+.nav a:hover{color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);
+  padding-block:clamp(36px,6vw,72px) clamp(28px,4vw,48px);align-items:start}
+.hero-text{min-width:0;display:flex;flex-direction:column;gap:22px}
+.who{display:flex;align-items:center;gap:14px}
+.who img{width:72px;height:72px;object-fit:cover;border-radius:4px;border:1px solid var(--rule);flex:none}
+.eyebrow{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);line-height:1.5}
+.eyebrow b{color:var(--ink);font-weight:500}
+.name{font-size:var(--s-name);font-weight:800;font-stretch:122%;letter-spacing:-.01em;text-transform:uppercase;line-height:.98}
+.name em{font-style:normal;color:var(--accent)}
+.role{font-family:var(--f-display);font-stretch:100%;font-weight:500;font-size:var(--s-lg);color:var(--ink);line-height:1.35}
+.lede{max-width:60ch;color:var(--ink-2)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:var(--s-sm);text-decoration:none;
+  padding:9px 14px;border:1px solid var(--ink);color:var(--ink);background:transparent;border-radius:2px;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+
+/* the sheet */
+.sheet{margin:0;min-width:0;display:flex;flex-direction:column;gap:10px}
+.frame{position:relative;border:1px solid var(--ink);padding:26px 14px 34px;background:var(--paper)}
+.frame::before,.frame::after{content:"";position:absolute;width:10px;height:10px;border:1.5px solid var(--ink)}
+.frame::before{top:-6px;left:-6px;border-right:0;border-bottom:0}
+.frame::after{bottom:-6px;right:-6px;border-left:0;border-top:0}
+.collar{position:absolute;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.collar.t{top:6px}.collar.b{bottom:8px}
+.ramp{display:inline-flex;align-items:center;gap:6px}
+.ramp i{display:inline-block;width:54px;height:8px;border:1px solid var(--rule);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 12%,transparent),var(--accent))}
+.scale{display:inline-flex;align-items:center;gap:8px}
+.scale i{display:inline-block;height:6px;width:40px;border:1.5px solid var(--ink);border-top:0}
+#sheet{display:block;width:100%;max-width:100%;aspect-ratio:4/3;background:var(--wash)}
+.sheet figcaption{font-size:var(--s-xs);color:var(--ink-2);line-height:1.5;max-width:60ch}
+
+/* readout strip */
+.readout{border-block:1px solid var(--rule)}
+.readout ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.readout li{padding:18px 18px 18px 0;display:flex;flex-direction:column;gap:2px;min-width:0}
+.readout li+li{padding-left:18px;border-left:1px solid var(--rule)}
+.readout b{font-family:var(--f-display);font-stretch:112%;font-weight:700;font-size:var(--s-xl);font-variant-numeric:tabular-nums;line-height:1.1}
+.readout span{font-size:var(--s-sm);color:var(--ink-2);line-height:1.4}
+
+/* ---------- sections ---------- */
+section.blk .wrap{padding-block:clamp(40px,6vw,68px) 0;display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px 40px}
+.label{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
+  display:flex;align-items:center;gap:10px;align-self:start;padding-top:6px}
+.label::before{content:"";width:18px;height:1.5px;background:var(--ink)}
+.blk h2{font-size:var(--s-xl);font-weight:700;font-stretch:110%;margin-bottom:22px}
+.body{min-width:0}
+
+/* platforms */
+.feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:1060px){.feat{grid-template-columns:minmax(0,1fr)}}
+.card{border:1px solid var(--rule);padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0;background:var(--paper)}
+.card h3{font-size:var(--s-lg);font-weight:700;font-stretch:112%;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.live{font-family:var(--f-mono);font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);
+  display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;padding:1px 7px;border-radius:999px}
+.live::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.card p{color:var(--ink-2);font-size:var(--s-sm);line-height:1.58}
+.links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:auto;font-family:var(--f-mono);font-size:var(--s-xs)}
+.links a{text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:1px;overflow-wrap:anywhere}
+.links a:hover{border-color:var(--accent)}
+.links a::after{content:" \2197"}
+.more{margin-top:16px;border-top:1px solid var(--rule)}
+.more li{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr);gap:6px 24px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.more h3{font-family:var(--f-body);font-size:var(--s-md);font-weight:600;line-height:1.4}
+.more p{color:var(--ink-2)}
+
+/* timeline */
+.tl li{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:4px 24px;padding:18px 0;border-top:1px solid var(--rule)}
+.tl li:last-child{border-bottom:1px solid var(--rule)}
+.when{font-family:var(--f-mono);font-size:var(--s-xs);color:var(--ink-2);padding-top:3px;font-variant-numeric:tabular-nums}
+.tl h3{font-family:var(--f-body);font-size:var(--s-md);font-weight:600;line-height:1.4}
+.org{color:var(--ink-2);font-size:var(--s-sm);margin-top:2px}
+.tl ul.pts{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.pts li{display:block;padding:0 0 0 16px;border:0;position:relative;color:var(--ink);max-width:70ch}
+.pts li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1.5px;background:var(--accent)}
+.tl li:last-child .pts li{border-bottom:0}
+
+/* outputs */
+.refs li{padding:16px 0;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px}
+.refs li:last-child{border-bottom:1px solid var(--rule)}
+.kind{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.ref{max-width:72ch}
+.ref i{font-style:italic}
+.ref + p{color:var(--ink-2);font-size:var(--s-sm);max-width:72ch}
+.doi{font-family:var(--f-mono);font-size:var(--s-xs);overflow-wrap:anywhere}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.skills div{padding:14px 0;border-top:1px solid var(--rule);min-width:0}
+.skills dt{font-weight:600;margin-bottom:4px}
+.skills dd{margin:0;color:var(--ink-2);font-size:var(--s-sm)}
+
+/* education */
+.edu li{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:4px 20px;padding:12px 0;border-top:1px solid var(--rule)}
+.edu li:last-child{border-bottom:1px solid var(--rule)}
+.edu .when{padding-top:2px}
+.edu span{color:var(--ink-2)}
+.sub{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:28px 0 6px}
+.honours{display:flex;flex-direction:column;gap:10px;max-width:72ch}
+.honours li{padding-left:16px;position:relative}
+.honours li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1.5px;background:var(--accent)}
+
+/* contact band */
+.contact{background:var(--band);color:var(--band-fg);margin-top:clamp(48px,7vw,84px)}
+.contact .wrap{padding-block:clamp(40px,6vw,64px);display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px 40px}
+.contact .label{color:var(--band-2)}
+.contact .label::before{background:var(--band-fg)}
+.contact h2{font-size:var(--s-xl);font-weight:700;font-stretch:110%;margin-bottom:12px}
+.contact p{color:var(--band-2);max-width:60ch}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:22px 0}
+.addr{font-family:var(--f-display);font-stretch:108%;font-weight:600;font-size:clamp(1.3rem,3.6vw,2rem);color:var(--band-fg);
+  user-select:all;overflow-wrap:anywhere;text-decoration:none;border-bottom:2px solid color-mix(in srgb,var(--band-fg) 35%,transparent)}
+.copy{font-family:var(--f-mono);font-size:var(--s-xs);color:var(--band-fg);background:transparent;cursor:pointer;
+  border:1px solid color-mix(in srgb,var(--band-fg) 45%,transparent);padding:6px 12px;border-radius:2px}
+.copy:hover{border-color:var(--band-fg)}
+.contact .links{font-size:var(--s-sm)}
+.contact .links a{color:var(--band-fg);border-color:color-mix(in srgb,var(--band-fg) 35%,transparent)}
+.contact .links a:hover{border-color:var(--band-fg)}
+footer .wrap{padding-block:18px;display:flex;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;
+  font-family:var(--f-mono);font-size:var(--s-xs);color:var(--ink-2)}
+
+/* ---------- narrow ---------- */
+@media (max-width:880px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr)}
+  section.blk .wrap,.contact .wrap{grid-template-columns:minmax(0,1fr);gap:8px}
+  .readout ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .readout li:nth-child(3){padding-left:0;border-left:0}
+  .readout li:nth-child(n+3){border-top:1px solid var(--rule)}
+}
+@media (max-width:620px){
+  .feat,.skills{grid-template-columns:minmax(0,1fr)}
+  .more li,.tl li{grid-template-columns:minmax(0,1fr)}
+  .nav{display:none}
+}
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Handsome Bongani Nyoni, home"><b>HBN</b><span>Gweru, Zimbabwe · 19.45° S 29.82° E</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">Work</a><a href="#experience">Experience</a><a href="#outputs">Outputs</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <div class="who">
+          <img src="assets/nyoni.jpg" alt="Portrait of Handsome Bongani Nyoni" width="72" height="72">
+          <p class="eyebrow"><b>Spatial Data Scientist</b><br>Place Alert Labs · Midlands State University</p>
+        </div>
+        <h1 class="name">Handsome Bongani <em>Nyoni</em></h1>
+        <p class="role">GIS analyst and geospatial data scientist: remote sensing, Web GIS and personal exposure science.</p>
+        <p class="lede">I build geospatial platforms end to end, from field GPS and wearable sensor data to PostGIS databases, satellite indicators and web and mobile apps. I have more than six years of applied work across public health, natural resource and environmental programmes in Zimbabwe and sub-Saharan Africa, and I am a PhD candidate in Geomatics at the University of Cape Town.</p>
+        <div class="actions">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn" href="https://github.com/Hbnyoni" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://linkedin.com/in/bongani-handsome-nyoni" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+
+      <figure class="sheet">
+        <div class="frame">
+          <div class="collar t"><span>Sheet · GPS fixes on a 1 km grid</span><span class="ramp">few <i></i> many</span></div>
+          <canvas id="sheet" role="img" aria-label="Illustration: a generated GPS track that stops at three places, with the 1 km grid cells it passes through shaded by the number of fixes in each."></canvas>
+          <div class="collar b"><span class="scale"><i id="scalebar"></i>1 km</span><span>Equal-area grid</span></div>
+        </div>
+        <figcaption>A person's GPS track assigned to 1 km grid cells, the step SPECTRA automates for exposure studies. The track is generated for this page and is not study data.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="readout">
+    <div class="wrap">
+      <ul>
+        <li><b>6+ years</b><span>applied GIS, remote sensing and Web GIS</span></li>
+        <li><b>3.7 million</b><span>minute-level GPS and wearable sensor readings processed</span></li>
+        <li><b>340</b><span>participants in The Gambia, Kenya and Mozambique</span></li>
+        <li><b>57</b><span>satellite-derived indicators for 21 African countries</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="blk" id="work">
+    <div class="wrap">
+      <p class="label">Work</p>
+      <div class="body">
+        <h2>Live platforms and software</h2>
+        <div class="feat">
+          <article class="card">
+            <h3>SPECTRA Mobile <span class="live">Live</span></h3>
+            <p>Personal exposure and trajectory app with a web explorer. It turns GPS tracks and wearable sensor records into time-weighted, microenvironment-resolved personal exposure. Piloted at the MSU Research &amp; Innovation Week and at AARSE 2026, Harare (121 sessions). Open source, archived on Zenodo, with a full user training course.</p>
+            <div class="links">
+              <a href="https://placealert.org/spectra-mobile/" target="_blank" rel="noopener">App</a>
+              <a href="https://placealert.org/spectra-mobile/web.html" target="_blank" rel="noopener">Web explorer</a>
+              <a href="https://github.com/Hbnyoni/spectra" target="_blank" rel="noopener">Code</a>
+              <a href="https://doi.org/10.5281/zenodo.23363892" target="_blank" rel="noopener">Zenodo</a>
+              <a href="https://placealert.org/spectra-handbook.html" target="_blank" rel="noopener">Course</a>
+            </div>
+          </article>
+          <article class="card">
+            <h3>GIPEX <span class="live">Live</span></h3>
+            <p>Earth-observation indicator platform built in Python Dash: 57 satellite-derived indicators, including PM<sub>2.5</sub>, heat stress, greenness and flood risk, for 21 African countries.</p>
+            <div class="links">
+              <a href="https://portal.placealert.org/gipex/" target="_blank" rel="noopener">Platform</a>
+              <a href="https://placealert.org/courses.html" target="_blank" rel="noopener">Courses</a>
+            </div>
+          </article>
+          <article class="card">
+            <h3>CHEAQI dashboard and data</h3>
+            <p>Interactive personal PM<sub>2.5</sub> exposure dashboard for sub-Saharan Africa, openly described research datasets, and an archived evidence map of geospatial proxy indicators for air-pollution exposure.</p>
+            <div class="links">
+              <a href="https://placealert.org/pei-atlas-dev/" target="_blank" rel="noopener">Dashboard</a>
+              <a href="https://portal.placealert.org/cheaqi-data/" target="_blank" rel="noopener">Catalogue</a>
+              <a href="https://doi.org/10.5281/zenodo.24052999" target="_blank" rel="noopener">Evidence map</a>
+            </div>
+          </article>
+        </div>
+        <ul class="more">
+          <li><h3>Spatial exposure database</h3><p>PostgreSQL/PostGIS database for a personal exposure workflow: an equal-area 1 km grid, geodesic buffers and daily PM<sub>2.5</sub> surfaces (487,200 cell-days), with a publishing view for web mapping.</p></li>
+          <li><h3>Exposure modelling</h3><p>Random forest model of daily personal PM<sub>2.5</sub> exposure, tested on unseen places and days and against ground monitoring stations.</p></li>
+          <li><h3>Courses and training</h3><p>Built the SPECTRA and GIPEX training courses (enrolment, assessment, certificates), and designed and facilitated the GeoAI for Climate, Environment &amp; Health course for surveying and geomatics professionals at the Zimbabwe Young Surveyors Network Pre-Conference, Bulawayo (2026). <a href="https://placealert.org/courses.html" target="_blank" rel="noopener">Courses</a></p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="experience">
+    <div class="wrap">
+      <p class="label">Experience</p>
+      <div class="body">
+        <h2>Where I have worked</h2>
+        <ul class="tl">
+          <li>
+            <p class="when">May 2024 – present</p>
+            <div>
+              <h3>Spatial Data Scientist</h3>
+              <p class="org">Place Alert Labs, Surveying &amp; Geomatics Department, Midlands State University</p>
+              <ul class="pts">
+                <li>Built and maintain SPECTRA Mobile and GIPEX, live web and mobile GIS platforms delivering GPS trajectory analysis and satellite-derived indicators to research partners; released SPECTRA as open-source software with a Zenodo DOI.</li>
+                <li>Designed a PostgreSQL/PostGIS spatial database for a personal exposure workflow: an equal-area 1 km grid, geodesic buffers and daily PM<sub>2.5</sub> surfaces (487,200 cell-days), with a publishing view for web mapping.</li>
+                <li>Processed 3.7 million minute-level GPS and wearable sensor readings from 340 participants in The Gambia, Kenya and Mozambique, and automated Google Earth Engine extraction of satellite, land cover and building layers for every location.</li>
+                <li>Developed and validated a random forest model of daily personal PM<sub>2.5</sub> exposure, tested on unseen places and days and against ground monitoring stations.</li>
+                <li>Administer organisational geoportals and datasets to metadata and FAIR standards; coordinate field GPS and sensor data collection, and validate and consolidate data from field staff and partners.</li>
+                <li>Document workflows and standard operating procedures; built the SPECTRA and GIPEX training courses and provide technical GIS support to partners and junior staff.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <p class="when">Apr 2022 – Apr 2024</p>
+            <div>
+              <h3>GIS &amp; Monitoring and Evaluation Officer</h3>
+              <p class="org">National TB Control Programme, Ministry of Health and Child Care, Zimbabwe · USAID JSI/TIFA project (with Africa University)</p>
+              <ul class="pts">
+                <li>Led KoboToolbox mobile data collection for contact tracing and field surveillance, including form design, enumerator training and data quality assurance across district health teams.</li>
+                <li>Developed open-source web dashboards for TB surveillance, presented to the Ministry of Health, USAID and ICASA 2023.</li>
+                <li>Delivered GIS training to field and district staff nationwide in mobile data capture, mapping and spatial reporting.</li>
+                <li>Produced maps and spatial analyses of case distribution and programme coverage for national reporting, donor deliverables and routine data quality assessments (DHIS2); travelled routinely to remote districts to support data collection and verification.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <p class="when">Jan 2021 – Apr 2022</p>
+            <div>
+              <h3>Management Trainee, Geographic Information Systems</h3>
+              <p class="org">Working Plans Department, Allied Timbers Zimbabwe, Mutare</p>
+              <ul class="pts">
+                <li>Forest inventory mapping, stand delineation and GIS-based natural resource planning across commercial plantation estates.</li>
+                <li>Maintained forestry geodatabases and produced working-plan cartography for sustainable resource management and operational planning.</li>
+                <li>Applied remote sensing and geospatial fire risk modelling to plantation landscapes (published, <i>Journal of Environmental Management of Zimbabwe</i>).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <p class="when">Aug 2018 – Aug 2019</p>
+            <div>
+              <h3>GIS &amp; Hydrology Intern</h3>
+              <p class="org">Data Research Unit, Zimbabwe National Water Authority (ZINWA), Harare</p>
+              <ul class="pts">
+                <li>Hydrological modelling, catchment mapping and groundwater potential assessment; geodatabase maintenance across catchment monitoring sites.</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="outputs">
+    <div class="wrap">
+      <p class="label">Outputs</p>
+      <div class="body">
+        <h2>Publications, software and data</h2>
+        <ul class="refs">
+          <li>
+            <span class="kind">Journal article · 2026</span>
+            <p class="ref">Nyoni HB, Mushore TD, Munthali L, et al. Performance of road-traffic-based exposure proxies against personal PM<sub>2.5</sub> measurements in three Sub-Saharan African countries. <i>Air Quality, Atmosphere &amp; Health</i> 19:168.</p>
+            <p>Tests road-network proxies against a year of personal PM<sub>2.5</sub> measurements from 343 postpartum participants in The Gambia, Kenya and Mozambique. <a class="doi" href="https://doi.org/10.1007/s11869-026-02060-y" target="_blank" rel="noopener">doi.org/10.1007/s11869-026-02060-y</a></p>
+          </li>
+          <li>
+            <span class="kind">Software · Zenodo</span>
+            <p class="ref">SPECTRA v1.0: personal exposure and GPS trajectory analysis toolkit.</p>
+            <p><a class="doi" href="https://doi.org/10.5281/zenodo.23363892" target="_blank" rel="noopener">doi.org/10.5281/zenodo.23363892</a> · <a class="doi" href="https://github.com/Hbnyoni/spectra" target="_blank" rel="noopener">github.com/Hbnyoni/spectra</a></p>
+          </li>
+          <li>
+            <span class="kind">Data and code · Zenodo</span>
+            <p class="ref">Evidence map of geospatial proxies for air pollution exposure.</p>
+            <p><a class="doi" href="https://doi.org/10.5281/zenodo.24052999" target="_blank" rel="noopener">doi.org/10.5281/zenodo.24052999</a> · <a class="doi" href="https://github.com/Hbnyoni/geospatial-proxy-evidence-map" target="_blank" rel="noopener">github.com/Hbnyoni/geospatial-proxy-evidence-map</a></p>
+          </li>
+          <li>
+            <span class="kind">Earlier papers</span>
+            <p class="ref">Peer-reviewed work on geospatial fire risk modelling, groundwater potential mapping and environmental exposure assessment, in <i>Atmospheric Environment: X</i> and the <i>Journal of Environmental Management of Zimbabwe</i>.</p>
+            <p><a href="https://scholar.google.com/citations?hl=en&amp;user=PqT_5F8AAAAJ" target="_blank" rel="noopener">Full list on Google Scholar</a></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="skills">
+    <div class="wrap">
+      <p class="label">Skills</p>
+      <div class="body">
+        <h2>Tools and methods</h2>
+        <dl class="skills">
+          <div><dt>GIS and mapping</dt><dd>ArcGIS Pro, ArcGIS Enterprise, ArcGIS Online, QGIS, GeoDa, ILWIS; cartographic layout, map production, coordinate systems and equal-area projections</dd></div>
+          <div><dt>Spatial databases</dt><dd>PostgreSQL/PostGIS (vector and raster), geodatabase administration, SQL, metadata standards, FAIR data principles, QA/QC, SOP documentation</dd></div>
+          <div><dt>Remote sensing</dt><dd>Google Earth Engine (Python API), Sentinel-1/2, Landsat, MODIS, atmospheric and weather reanalysis grids; land cover, habitat assessment and change detection</dd></div>
+          <div><dt>Spatial analysis and modelling</dt><dd>Geodesic buffers, hot-spot analysis, spatial autocorrelation, variograms, random forest exposure modelling, grouped spatial and temporal cross-validation</dd></div>
+          <div><dt>Web and mobile GIS</dt><dd>Progressive web apps, R Shiny, Python Dash, DHIS2, Power BI, Tableau, geospatial storytelling, Linux server deployment</dd></div>
+          <div><dt>Field data collection</dt><dd>KoboToolbox, ODK, GPS survey, wearable sensors, mobile form design, field team coordination, validation and verification workflows</dd></div>
+          <div><dt>Programming</dt><dd>Python (NumPy, pandas, GeoPandas, Dash), R (Shiny, tidyverse), SQL, Git and GitHub, Linux</dd></div>
+          <div><dt>Also</dt><dd>Monitoring and evaluation, training delivery, stakeholder reporting; English and Shona</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="education">
+    <div class="wrap">
+      <p class="label">Education</p>
+      <div class="body">
+        <h2>Education and training</h2>
+        <ul class="edu">
+          <li><p class="when">2025–28</p><p><b>PhD in Geomatics</b> (in progress) · <span>University of Cape Town</span><br><span>Thesis: a geospatial indicator of daily personal PM<sub>2.5</sub> exposure for sub-Saharan Africa</span></p></li>
+          <li><p class="when">2023</p><p><b>MSc Geomatics Engineering</b> · <span>University of Zimbabwe</span></p></li>
+          <li><p class="when">2023</p><p><b>Postgraduate Diploma, Project Planning, Monitoring &amp; Evaluation</b> · <span>Great Zimbabwe University</span></p></li>
+          <li><p class="when">2020</p><p><b>BSc Honours, Geographical Biogeosciences</b> · <span>University of Zimbabwe</span></p></li>
+          <li><p class="when">2024</p><p><b>IBM Python for Data Science, AI &amp; Development</b> · <span>Coursera / IBM</span></p></li>
+        </ul>
+        <p class="sub">Further training</p>
+        <ul class="honours">
+          <li>Geodesy for a Resilient Africa Summer School, AIMS, Cameroon (2026)</li>
+          <li>Open Geospatial Data, Low-cost Tools &amp; Participatory Approaches for Urban Climate Services in Africa, Ardhi University, Tanzania (2025)</li>
+          <li>eLwazi Containerisation &amp; Workflows Hackathon and FAIR Data Principles training, Cape Town (2024, 2025, 2026)</li>
+        </ul>
+        <p class="sub">Presentations and recognition</p>
+        <ul class="honours">
+          <li>AARSE 2026, Harare (October 2026): opening presentation, oral presentation and GIPEX poster.</li>
+          <li>CeSHHAR ECRI Symposium (October 2026): SPECTRA poster.</li>
+          <li>TB surveillance dashboards presented to the Ministry of Health and Child Care, USAID and ICASA 2023.</li>
+          <li>Seven competitive travel grants and scholarships for international geospatial and data science training (eLwazi, KADI, AIMS, Climate &amp; Health Africa).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="label">Contact</p>
+      <div class="body">
+        <h2>Work with me</h2>
+        <p>Open to GIS, remote sensing and spatial data science roles, collaborations and training requests.</p>
+        <div class="mail">
+          <a class="addr" id="addr" href="mailto:hbnyoni@gmail.com">hbnyoni@gmail.com</a>
+          <button class="copy" id="copy" type="button">Copy email</button>
+        </div>
+        <div class="links">
+          <a href="https://linkedin.com/in/bongani-handsome-nyoni" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/Hbnyoni" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=PqT_5F8AAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://placealert.org/" target="_blank" rel="noopener">Place Alert Labs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Handsome Bongani Nyoni</span><span>Place Alert Labs · Midlands State University · Gweru</span></div>
+</footer>
+
+<script>
+/* Copy email: write inside the click, fall back to selecting the address. */
+(function(){
+  const b=document.getElementById('copy'), a=document.getElementById('addr');
+  b.addEventListener('click',function(){
+    const done=function(t){b.textContent=t;setTimeout(function(){b.textContent='Copy email';},1800);};
+    const sel=function(){const r=document.createRange();r.selectNodeContents(a);const s=getSelection();s.removeAllRanges();s.addRange(r);done('Selected, press Ctrl+C');};
+    try{navigator.clipboard.writeText(a.textContent.trim()).then(function(){done('Copied');},sel);}catch(e){sel();}
+  });
+})();
+
+/* The sheet: a generated GPS track (three stops joined by curved trips), fixes binned into grid cells.
+   Frame 0 shows the whole track; a red head then walks along it. Reduced motion: no walk. */
+(function(){
+  const cv=document.getElementById('sheet'), ctx=cv.getContext('2d'), bar=document.getElementById('scalebar');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const COLS=14; let W=0,H=0,CELL=0,pts=[],cells=[],maxc=1,head=0,raf=0;
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  const clamp=function(v){return Math.max(.07,Math.min(.93,v));};
+  function track(){
+    const r=rng(20261119), out=[], stops=[[.17,.70],[.44,.34],[.80,.52],[.58,.83],[.19,.68]];
+    let x=stops[0][0], y=stops[0][1];
+    const dwell=function(n){for(let k=0;k<n;k++)out.push([x+(r()-.5)*.03,y+(r()-.5)*.03]);};
+    for(let s=1;s<stops.length;s++){
+      dwell(30);
+      const tx=stops[s][0], ty=stops[s][1], cx=clamp((x+tx)/2+(r()-.5)*.34), cy=clamp((y+ty)/2+(r()-.5)*.34);
+      const n=55+Math.floor(r()*25);
+      for(let k=1;k<=n;k++){const t=k/n,a=(1-t)*(1-t),b=2*(1-t)*t,c=t*t;
+        out.push([a*x+b*cx+c*tx+(r()-.5)*.008, a*y+b*cy+c*ty+(r()-.5)*.008]);}
+      x=tx;y=ty;
+    }
+    dwell(30); return out;
+  }
+  const U=track();
+  function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  function size(){
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth; H=cv.clientHeight; if(!W||!H)return;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    CELL=W/COLS; bar.style.width=CELL+'px';
+    pts=U.map(function(p){return [p[0]*W,p[1]*H];});
+    const m=new Map(); pts.forEach(function(p){const k=Math.floor(p[0]/CELL)+','+Math.floor(p[1]/CELL);m.set(k,(m.get(k)||0)+1);});
+    cells=[]; maxc=1; m.forEach(function(v,k){const ij=k.split(',').map(Number);cells.push([ij[0],ij[1],v]);if(v>maxc)maxc=v;});
+    draw();
+  }
+  function draw(){
+    if(!W)return;
+    const C={wash:tok('--wash'),rule:tok('--rule'),ink:tok('--ink'),ink2:tok('--ink-2'),acc:tok('--accent'),sig:tok('--signal')};
+    ctx.fillStyle=C.wash; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=C.acc;
+    cells.forEach(function(c){ctx.globalAlpha=.1+.6*Math.pow(c[2]/maxc,.55);ctx.fillRect(c[0]*CELL,c[1]*CELL,CELL,CELL);});
+    ctx.globalAlpha=1; ctx.strokeStyle=C.rule; ctx.lineWidth=1; ctx.beginPath();
+    for(let x=CELL;x<W-.5;x+=CELL){ctx.moveTo(Math.round(x)+.5,0);ctx.lineTo(Math.round(x)+.5,H);}
+    for(let y=CELL;y<H-.5;y+=CELL){ctx.moveTo(0,Math.round(y)+.5);ctx.lineTo(W,Math.round(y)+.5);}
+    ctx.stroke();
+    ctx.strokeStyle=C.ink2; ctx.globalAlpha=.55; ctx.lineWidth=1.2; ctx.beginPath();
+    pts.forEach(function(p,i){i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}); ctx.stroke();
+    ctx.globalAlpha=1; ctx.fillStyle=C.ink;
+    pts.forEach(function(p){ctx.beginPath();ctx.arc(p[0],p[1],1.4,0,6.2832);ctx.fill();});
+    const h=pts[Math.min(Math.floor(head),pts.length-1)];
+    ctx.fillStyle=C.sig; ctx.globalAlpha=.22; ctx.beginPath(); ctx.arc(h[0],h[1],9,0,6.2832); ctx.fill();
+    ctx.globalAlpha=1; ctx.beginPath(); ctx.arc(h[0],h[1],4,0,6.2832); ctx.fill();
+  }
+  let last=0;
+  function tick(t){
+    if(!last)last=t; const dt=Math.min(t-last,64); last=t;
+    head+=dt*0.06; if(head>pts.length+40)head=0;
+    draw(); raf=requestAnimationFrame(tick);
+  }
+  size();
+  if(reduce){head=U.length-1;draw();}
+  else{
+    raf=requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){cancelAnimationFrame(raf);}else{last=0;raf=requestAnimationFrame(tick);}
+    });
+  }
+  if(reduce)head=U.length-1;
+  let rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,120);});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+</script>
+</body>
+</html>
