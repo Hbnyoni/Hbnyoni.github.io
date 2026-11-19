@@ -162,6 +162,11 @@ section.blk .wrap{padding-block:clamp(40px,6vw,68px) 0;display:grid;grid-templat
 .ref i{font-style:italic}
 .ref + p{color:var(--ink-2);font-size:var(--s-sm);max-width:72ch}
 .doi{font-family:var(--f-mono);font-size:var(--s-xs);overflow-wrap:anywhere}
+.body > h2 + .sub{margin-top:0}
+.ref a{color:inherit;text-decoration-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.ref a:hover{color:var(--accent)}
+.ref b{font-weight:600}
+.scholar{margin-top:18px;font-family:var(--f-mono);font-size:var(--s-sm)}
 
 /* skills */
 .skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
@@ -375,12 +380,39 @@ html{scroll-behavior:smooth}
       <p class="label">Outputs</p>
       <div class="body">
         <h2>Publications, software and data</h2>
+        <p class="sub">Publications</p>
         <ul class="refs">
           <li>
-            <span class="kind">Journal article · 2026</span>
-            <p class="ref">Nyoni HB, Mushore TD, Munthali L, et al. Performance of road-traffic-based exposure proxies against personal PM<sub>2.5</sub> measurements in three Sub-Saharan African countries. <i>Air Quality, Atmosphere &amp; Health</i> 19:168.</p>
-            <p>Tests road-network proxies against a year of personal PM<sub>2.5</sub> measurements from 343 postpartum participants in The Gambia, Kenya and Mozambique. <a class="doi" href="https://doi.org/10.1007/s11869-026-02060-y" target="_blank" rel="noopener">doi.org/10.1007/s11869-026-02060-y</a></p>
+            <span class="kind">2026</span>
+            <p class="ref">Munthali L, Mushore TD, <b>Nyoni HB</b>, Makhanya SA, Van Aardenne L, et al. <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PqT_5F8AAAAJ&amp;citation_for_view=PqT_5F8AAAAJ:u-x6o8ySG0sC" target="_blank" rel="noopener">Characterizing effects of air quality in maternal, newborn and child health (CHEAQI–MNCH) in sub-Saharan Africa: a research protocol.</a> <i>Journal of Global Health Economics and Policy</i> 6.</p>
           </li>
+          <li>
+            <span class="kind">2026</span>
+            <p class="ref"><b>Nyoni HB</b>, Mushore TD, Munthali L, Makhanya SA, Chikoko L, Luchters S, et al. <a href="https://doi.org/10.1007/s11869-026-02060-y" target="_blank" rel="noopener">Performance of road-traffic-based exposure proxies against personal PM<sub>2.5</sub> measurements in three Sub-Saharan African countries.</a> <i>Air Quality, Atmosphere &amp; Health</i> 19(8):168.</p>
+          </li>
+          <li>
+            <span class="kind">2026 · Preprint</span>
+            <p class="ref"><b>Nyoni HB</b>, Mandeya RN, Tigere D, Chinwadzimba ZK, Sibanda R, et al. <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PqT_5F8AAAAJ&amp;citation_for_view=PqT_5F8AAAAJ:UeHWp8X0CEIC" target="_blank" rel="noopener">Contrasting coal power trajectories in Southern Africa: compound air pollution, extreme heat exposures and the 2023 Hwange expansion.</a> <i>EarthArXiv</i>.</p>
+          </li>
+          <li>
+            <span class="kind">2026</span>
+            <p class="ref">Mushore TD, <b>Nyoni HB</b>, Munthali L, Makhanya SA, Chikoko L, et al. <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PqT_5F8AAAAJ&amp;citation_for_view=PqT_5F8AAAAJ:2osOgNQ5qMEC" target="_blank" rel="noopener">Daily outdoor PM<sub>2.5</sub> exposure characterization and road edge effect during a 2022–2023 monitoring campaign in Gambia, Kenya and Mozambique.</a> <i>Atmospheric Environment: X</i>, 100463.</p>
+          </li>
+          <li>
+            <span class="kind">2026</span>
+            <p class="ref">Makanga T, <b>Nyoni HB</b>, Sibanda R, Chinwadzimba Z, Shangwa T, et al. <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PqT_5F8AAAAJ&amp;citation_for_view=PqT_5F8AAAAJ:qjMakFHDy7sC" target="_blank" rel="noopener">The Place Alert Portal: a reusable digital infrastructure and platform for climate, environment and maternal health research in Sub-Saharan Africa.</a></p>
+          </li>
+          <li>
+            <span class="kind">2025</span>
+            <p class="ref">Mushore TD, <b>Nyoni HB</b>, Munthali L, Makhanya SA, Chikoko L, et al. <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PqT_5F8AAAAJ&amp;citation_for_view=PqT_5F8AAAAJ:d1gkVwhDpl0C" target="_blank" rel="noopener">Edge effect of distance from roads on outdoor air quality in Mozambique.</a> <i>BJOG: An International Journal of Obstetrics and Gynaecology</i> 132:21.</p>
+          </li>
+          <li>
+            <span class="kind">Earlier work</span>
+            <p class="ref"><b>Nyoni HB</b>, Mapranga JT. <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=PqT_5F8AAAAJ&amp;citation_for_view=PqT_5F8AAAAJ:u5HHmVD_uO8C" target="_blank" rel="noopener">Geospatial analysis of ground water potential in Nyamandlovhu Umguza District, Zimbabwe.</a></p>
+          </li>
+        </ul>
+        <p class="sub">Software and data</p>
+        <ul class="refs">
           <li>
             <span class="kind">Software · Zenodo</span>
             <p class="ref">SPECTRA v1.0: personal exposure and GPS trajectory analysis toolkit.</p>
@@ -391,12 +423,8 @@ html{scroll-behavior:smooth}
             <p class="ref">Evidence map of geospatial proxies for air pollution exposure.</p>
             <p><a class="doi" href="https://doi.org/10.5281/zenodo.24052999" target="_blank" rel="noopener">doi.org/10.5281/zenodo.24052999</a> · <a class="doi" href="https://github.com/Hbnyoni/geospatial-proxy-evidence-map" target="_blank" rel="noopener">github.com/Hbnyoni/geospatial-proxy-evidence-map</a></p>
           </li>
-          <li>
-            <span class="kind">Earlier papers</span>
-            <p class="ref">Peer-reviewed work on geospatial fire risk modelling, groundwater potential mapping and environmental exposure assessment, in <i>Atmospheric Environment: X</i> and the <i>Journal of Environmental Management of Zimbabwe</i>.</p>
-            <p><a href="https://scholar.google.com/citations?hl=en&amp;user=PqT_5F8AAAAJ" target="_blank" rel="noopener">Full list on Google Scholar</a></p>
-          </li>
         </ul>
+        <p class="scholar"><a href="https://scholar.google.com/citations?hl=en&amp;user=PqT_5F8AAAAJ" target="_blank" rel="noopener">Google Scholar profile</a></p>
       </div>
     </div>
   </section>
