@@ -178,6 +178,10 @@ section.blk .wrap{padding-block:clamp(40px,6vw,68px) 0;display:grid;grid-templat
 .edu li{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:4px 20px;padding:12px 0;border-top:1px solid var(--rule)}
 .edu li:last-child{border-bottom:1px solid var(--rule)}
 .edu .when{padding-top:2px}
+.edu li > *{min-width:0}
+.dated .when{white-space:nowrap}
+.dated .org{margin-top:2px}
+.dated b{font-weight:600}
 .edu span{color:var(--ink-2)}
 .sub{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin:28px 0 6px}
 .honours{display:flex;flex-direction:column;gap:10px;max-width:72ch}
@@ -225,7 +229,7 @@ html{scroll-behavior:smooth}
   <div class="wrap">
     <a class="mark" href="#top" aria-label="Handsome Bongani Nyoni, home"><b>HBN</b><span>Gweru, Zimbabwe · 19.45° S 29.82° E</span></a>
     <nav class="nav" aria-label="Sections">
-      <a href="#work">Work</a><a href="#experience">Experience</a><a href="#outputs">Outputs</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+      <a href="#work">Work</a><a href="#experience">Experience</a><a href="#outputs">Outputs</a><a href="#talks">Talks</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -429,6 +433,40 @@ html{scroll-behavior:smooth}
     </div>
   </section>
 
+  <section class="blk" id="talks">
+    <div class="wrap">
+      <p class="label">Talks</p>
+      <div class="body">
+        <h2>Presentations, grants and scholarships</h2>
+        <p class="sub">Presentations</p>
+        <ul class="edu dated">
+          <li><p class="when">Oct 2026</p><div><p><b>SPECTRA: transforming low-cost sensor and GPS data into personal air pollution exposure intelligence for African health research</b></p><p class="org">Oral presentation · AARSE 2026, 30th anniversary conference, Harare</p></div></li>
+          <li><p class="when">Oct 2026</p><div><p><b>SPECTRA: tracking personal air pollution exposure</b></p><p class="org">Opening presentation and live SPECTRA Mobile demonstration · AARSE 2026, Harare</p></div></li>
+          <li><p class="when">Oct 2026</p><div><p><b>GIPEX: a free Google Earth Engine platform putting continental-scale environmental exposure assessment in the hands of African health researchers</b></p><p class="org">Poster · AARSE 2026, Harare</p></div></li>
+          <li><p class="when">Oct 2026</p><div><p><b>SPECTRA transforms low-cost sensor and GPS data into personal air pollution exposure intelligence for African maternal health research</b></p><p class="org">Poster · CeSHHAR ECRI Symposium 2026</p></div></li>
+          <li><p class="when">Sep 2026</p><div><p><b>3.7 million points, 343 women, one exposure story: SPECTRA transforms low-cost sensor and GPS data into personal air pollution exposure intelligence for African maternal health research</b></p><p class="org">Poster and SPECTRA Mobile demonstrations · MSU Research, Innovation and Industrialisation Week, Gweru</p></div></li>
+          <li><p class="when">Sep 2026</p><div><p><b>Can roads predict personal PM<sub>2.5</sub> exposure in sub-Saharan Africa? Evidence from The Gambia, Kenya and Mozambique</b></p><p class="org">Poster · MSU Research, Innovation and Industrialisation Week, Gweru</p></div></li>
+          <li><p class="when">Aug 2026</p><div><p><b>Uncovering geospatial proxies for mapping outdoor personal PM<sub>2.5</sub> exposure in sub-Saharan Africa</b></p><p class="org">Seminar · UCT Geomatics Brown Bag, Cape Town</p></div></li>
+          <li><p class="when">Jun 2026</p><div><p><b>GeoAI for Climate, Environment and Health</b></p><p class="org">Invited workshop · Survey Institute of Zimbabwe Young Surveyors Pre-Conference, Bulawayo</p></div></li>
+          <li><p class="when">2026</p><div><p><b>A hybrid machine-learning pipeline for a PM<sub>2.5</sub> personal exposure indicator across sub-Saharan Africa</b></p><p class="org">Poster · Geodesy for a Resilient Africa Summer School, AIMS, Cameroon</p></div></li>
+          <li><p class="when">2026</p><div><p><b>Africa Clean Air Forum 2026</b></p><p class="org">Poster accepted · Pretoria</p></div></li>
+          <li><p class="when">2024</p><div><p><b>Validation of pollution proxy indicators using personal exposure data</b></p><p class="org">Presentation · 1st Climate and Health in Africa Conference, Harare</p></div></li>
+          <li><p class="when">2023</p><div><p><b>Interactive TB web dashboards for the National TB Control Programme, Ministry of Health and Child Care, Zimbabwe</b></p><p class="org">Presentation · ICASA 2023</p></div></li>
+        </ul>
+        <p class="sub">Grants and scholarships</p>
+        <ul class="edu dated">
+          <li><p class="when">2026</p><div><p><b>Travel grant</b></p><p class="org">Geodesy for a Resilient Africa Summer School, AIMS, Cameroon</p></div></li>
+          <li><p class="when">2026</p><div><p><b>Travel grant</b></p><p class="org">eLwazi Data Jamboree on FAIR Data Principles, Cape Town</p></div></li>
+          <li><p class="when">2025</p><div><p><b>Travel grant</b></p><p class="org">eLwazi Containerisation &amp; Workflows Hackathon, Cape Town</p></div></li>
+          <li><p class="when">2025</p><div><p><b>Travel grant</b></p><p class="org">KADI Urban Climate Services Training, Ardhi University, Tanzania</p></div></li>
+          <li><p class="when">2024</p><div><p><b>Travel grant</b></p><p class="org">eLwazi Data Jamboree on FAIR Data Principles, Cape Town</p></div></li>
+          <li><p class="when">2024</p><div><p><b>Early-career researcher travel grant</b></p><p class="org">Climate and Health in Africa Conference, Harare</p></div></li>
+          <li><p class="when">2024</p><div><p><b>Scholarship</b></p><p class="org">1st Climate and Health in Africa Conference</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="blk" id="skills">
     <div class="wrap">
       <p class="label">Skills</p>
@@ -465,13 +503,6 @@ html{scroll-behavior:smooth}
           <li>Geodesy for a Resilient Africa Summer School, AIMS, Cameroon (2026)</li>
           <li>Open Geospatial Data, Low-cost Tools &amp; Participatory Approaches for Urban Climate Services in Africa, Ardhi University, Tanzania (2025)</li>
           <li>eLwazi Containerisation &amp; Workflows Hackathon and FAIR Data Principles training, Cape Town (2024, 2025, 2026)</li>
-        </ul>
-        <p class="sub">Presentations and recognition</p>
-        <ul class="honours">
-          <li>AARSE 2026, Harare (October 2026): opening presentation, oral presentation and GIPEX poster.</li>
-          <li>CeSHHAR ECRI Symposium (October 2026): SPECTRA poster.</li>
-          <li>TB surveillance dashboards presented to the Ministry of Health and Child Care, USAID and ICASA 2023.</li>
-          <li>Seven competitive travel grants and scholarships for international geospatial and data science training (eLwazi, KADI, AIMS, Climate &amp; Health Africa).</li>
         </ul>
       </div>
     </div>
